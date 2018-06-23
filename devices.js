@@ -542,10 +542,20 @@ const devices = [
         fromZigbee: [],
         toZigbee: [],
         configure: (ieeeAddr, shepherd, coordinator, callback) => {
+            const cfgRptRec = {
+                direction: 0, attrId: 0, dataType: 24, minRepIntval: 0, maxRepIntval: 1000, repChange: 0,
+            };
+
             const device = shepherd.find(ieeeAddr, 6);
             if (device) {
                 device.bind('msOccupancySensing', coordinator, (error) => {
-                    callback(error);
+                    if (error) {
+                        callback(error);
+                    } else {
+                        device.foundation('msOccupancySensing', 'configReport', [cfgRptRec]).then((rsp) => {
+                            callback(rsp[0].status === 0);
+                        });
+                    }
                 });
             }
         },
