@@ -564,6 +564,23 @@ const devices = [
         fromZigbee: generic.light_onoff_brightness().fromZigbee,
         toZigbee: generic.light_onoff_brightness().toZigbee,
     },
+    {
+        zigbeeModel: ['MOT003'],
+        model: 'MOT003',
+        vendor: 'Hive',
+        description: 'Hive Motion Sensor',
+        supports: 'occupancy',
+        fromZigbee: [],
+        toZigbee: [],
+        configure: (ieeeAddr, shepherd, coordinator, callback) => {
+            const device = shepherd.find(ieeeAddr, 6);
+            if (device) {
+                device.bind('msOccupancySensing', coordinator, (error) => {
+                    callback(error);
+                });
+            }
+        },
+    },
 
     // Innr
     {
