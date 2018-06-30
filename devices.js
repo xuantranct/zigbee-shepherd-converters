@@ -571,6 +571,26 @@ const devices = [
             execute(device, actions, callback);
         },
     },
+    {
+        zigbeeModel: ['Switch 4x EU-LIGHTIFY'],
+        model: 'TODO',
+        vendor: 'OSRAM',
+        description: 'LIGHTIFY Switch 4x',
+        supports: 'TODO',
+        fromZigbee: [],
+        toZigbee: [],
+        configure: (ieeeAddr, shepherd, coordinator, callback) => {
+            const device = shepherd.find(ieeeAddr, 1);
+            const actions = [
+                (cb) => device.bind('genOnOff', coordinator, cb),
+                (cb) => device.bind('lightingColorCtrl', coordinator, cb),
+                (cb) => device.bind('genLevelCtrl', coordinator, cb),
+                (cb) => device.bind('genPowerCfg', coordinator, cb),
+            ];
+
+            execute(device, actions, callback);
+        },
+    },
 
     // Hive
     {
