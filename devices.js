@@ -573,22 +573,17 @@ const devices = [
         fromZigbee: [],
         toZigbee: [],
         configure: (ieeeAddr, shepherd, coordinator, callback) => {
-            const cfgRptRec = {
-                direction: 0, attrId: 0, dataType: 24, minRepIntval: 0, maxRepIntval: 1000, repChange: 0,
-            };
-
             const device = shepherd.find(ieeeAddr, 6);
-            if (device) {
-                device.bind('msOccupancySensing', coordinator, (error) => {
-                    if (error) {
-                        callback(error);
-                    } else {
-                        device.foundation('msOccupancySensing', 'configReport', [cfgRptRec]).then((rsp) => {
-                            callback(rsp[0].status === 0);
-                        });
-                    }
-                });
-            }
+            const actions = [
+                (cb) => device.write('ssIasZone', 'iasCieAddr', coordinator.device.getIeeeAddr(), cb),
+                (cb) => device.report('msOccupancySensing', 'occupancy', 0, 600, null, cb),
+                (cb) => device.report('msTemperatureMeasurement', 'measuredValue', 30, 600, 1, cb),
+                (cb) => device.report('genPowerCfg', 'batteryVoltage', 10, 600, 1, cb),
+                (cb) => device.report('ssIasZone', 'zoneStatus', 0, 30, null, cb),
+                (cb) => device.functional('ssIasZone', 'enrollRsp', {enrollrspcode: 1, zoneid: 23}, cb),
+            ];
+
+            execute(device, actions, callback);
         },
     },
 
