@@ -806,6 +806,21 @@ const devices = [
         fromZigbee: generic.light_onoff_brightness().fromZigbee,
         toZigbee: generic.light_onoff_brightness().toZigbee,
     },
+
+    // Nue
+    {
+        zigbeeModel: ['FB56+ZSW1HKJ2.5', 'FB56+ZSW1HKJ1.7'],
+        model: 'TODO',
+        vendor: 'Nue',
+        description: 'Smart light switch - 2 gang',
+        supports: 'TODO',
+        fromZigbee: [],
+        toZigbee: [],
+        configure: (ieeeAddr, shepherd, coordinator, callback) => {
+            const device = shepherd.find(ieeeAddr, 1);
+            execute(device, [(cb) => device.bind('genOnOff', coordinator, cb)], callback);
+        },
+    },
 ];
 
 module.exports = devices;
