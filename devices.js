@@ -1353,6 +1353,25 @@ const devices = [
             execute(device, actions, callback);
         },
     },
+    {
+        zigbeeModel: ['moisturev4'],
+        model: 'TODO',
+        vendor: 'SmartThings',
+        description: 'SmartThings water leak sensor',
+        supports: 'waterleak',
+        fromZigbee: [],
+        toZigbee: [],
+        configure: (ieeeAddr, shepherd, coordinator, callback) => {
+            const device = shepherd.find(ieeeAddr, 1);
+            const actions = [
+                (cb) => device.write('ssIasZone', 'iasCieAddr', coordinator.device.getIeeeAddr(), cb),
+                (cb) => device.report('ssIasZone', 'zoneStatus', 0, 30, null, cb),
+                (cb) => device.functional('ssIasZone', 'enrollRsp', {enrollrspcode: 1, zoneid: 24}, cb),
+            ];
+
+            execute(device, actions, callback);
+        },
+    },
 
     // Trust
     {
