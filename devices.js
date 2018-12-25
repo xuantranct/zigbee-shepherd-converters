@@ -33,7 +33,7 @@ const generic = {
             fromZigbee: [fz.light_brightness, fz.light_color_colortemp, fz.light_state],
             toZigbee: [
                 tz.on_off, tz.light_brightness, tz.light_color, tz.ignore_transition,
-                tz.light_alert, tz.hue_power_on_behaviour_1. tz.hue_power_on_behaviour_2,
+                tz.light_alert, tz.hue_power_on_behaviour_1, tz.hue_power_on_behaviour_2,
             ],
         };
     },
