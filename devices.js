@@ -9,21 +9,32 @@ const generic = {
         return {
             supports: 'on/off, brightness',
             fromZigbee: [fz.light_brightness, fz.light_state],
-            toZigbee: [tz.on_off, tz.light_brightness, tz.ignore_transition, tz.light_alert],
+            toZigbee: [
+                tz.on_off, tz.light_brightness, tz.ignore_transition,
+                tz.light_alert, tz.hue_power_on_behaviour_1,
+                tz.hue_power_on_behaviour_2,
+            ],
         };
     },
     light_onoff_brightness_colortemp: () => {
         return {
             supports: 'on/off, brightness, color temperature',
             fromZigbee: [fz.light_brightness, fz.light_color_colortemp, fz.light_state],
-            toZigbee: [tz.on_off, tz.light_brightness, tz.light_colortemp, tz.ignore_transition, tz.light_alert],
+            toZigbee: [
+                tz.on_off, tz.light_brightness, tz.light_colortemp,
+                tz.ignore_transition, tz.light_alert, tz.hue_power_on_behaviour_1,
+                tz.hue_power_on_behaviour_2,
+            ],
         };
     },
     light_onoff_brightness_colorxy: () => {
         return {
             supports: 'on/off, brightness, color xy',
             fromZigbee: [fz.light_brightness, fz.light_color_colortemp, fz.light_state],
-            toZigbee: [tz.on_off, tz.light_brightness, tz.light_color, tz.ignore_transition, tz.light_alert],
+            toZigbee: [
+                tz.on_off, tz.light_brightness, tz.light_color, tz.ignore_transition,
+                tz.light_alert, tz.hue_power_on_behaviour_1. tz.hue_power_on_behaviour_2,
+            ],
         };
     },
     light_onoff_brightness_colortemp_colorxy: () => {
@@ -32,7 +43,7 @@ const generic = {
             fromZigbee: [fz.light_brightness, fz.light_color_colortemp, fz.light_state],
             toZigbee: [
                 tz.on_off, tz.light_brightness, tz.light_colortemp, tz.light_color, tz.ignore_transition,
-                tz.light_alert,
+                tz.light_alert, tz.hue_power_on_behaviour_1, tz.hue_power_on_behaviour_2,
             ],
         };
     },

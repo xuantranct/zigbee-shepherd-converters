@@ -308,6 +308,52 @@ const converters = {
             }
         },
     },
+    hue_power_on_behaviour_1: {
+        key: ['power_on_behaviour_1'],
+        convert: (key, value, message, type) => {
+            const lookup = {
+                'off': 0x01,
+                'recover': 0xff,
+            };
+
+            if (type === 'set') {
+                return {
+                    cid: 'genOnOff',
+                    cmd: 'write',
+                    cmdType: 'foundation',
+                    zclData: [{
+                        attrId: 0x4003,
+                        dataType: 0x30,
+                        attrData: lookup[value],
+                    }],
+                    cfg: cfg.default,
+                };
+            }
+        },
+    },
+    hue_power_on_behaviour_2: {
+        key: ['power_on_behaviour_2'],
+        convert: (key, value, message, type) => {
+            const lookup = {
+                'off': 0xfe,
+                'recover': 0xff,
+            };
+
+            if (type === 'set') {
+                return {
+                    cid: 'genLevelCtrl',
+                    cmd: 'write',
+                    cmdType: 'foundation',
+                    zclData: [{
+                        attrId: 0x4000,
+                        dataType: 0x20,
+                        attrData: lookup[value],
+                    }],
+                    cfg: cfg.default,
+                };
+            }
+        },
+    },
 
     // Ignore converters
     ignore_transition: {
