@@ -1173,6 +1173,23 @@ const converters = {
             }
         },
     },
+    ZNCZ02LM_power: {
+        key: ['power'],
+        convert: (key, value, message, type, postfix) => {
+            const cid = 'genAnalogInput';
+            const attrId = 'presentValue';
+
+            if (type === 'get') {
+                return {
+                    cid: cid,
+                    cmd: 'read',
+                    cmdType: 'foundation',
+                    zclData: [{attrId: zclId.attr(cid, attrId).value}],
+                    cfg: cfg.default,
+                };
+            }
+        },
+    },
     YRD426NRSC_lock: {
         key: ['state'],
         convert: (key, value, message, type, postfix) => {

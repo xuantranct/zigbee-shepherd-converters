@@ -360,7 +360,7 @@ const devices = [
             fz.state, fz.xiaomi_power, fz.xiaomi_plug_state, fz.ignore_onoff_change,
             fz.ignore_basic_change, fz.ignore_analog_change,
         ],
-        toZigbee: [tz.on_off],
+        toZigbee: [tz.on_off, tz.ZNCZ02LM_power],
     },
     {
         zigbeeModel: ['lumi.ctrl_86plug', 'lumi.ctrl_86plug.aq1'],
