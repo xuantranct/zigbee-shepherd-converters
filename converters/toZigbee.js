@@ -874,6 +874,24 @@ const converters = {
             }
         },
     },
+    ZNCZ02LM_power_on_behavior: {
+        key: ['power_on_behavior'],
+        convert: (key, value, message, type, postfix) => {
+            if (type === 'set') {
+                return {
+                    cid: 'genBasic',
+                    cmd: 'write',
+                    cmdType: 'foundation',
+                    zclData: [{
+                        attrId: 0xFFF0,
+                        dataType: 0x41, // dataType
+                        attrData: value,
+                    }],
+                    cfg: cfg.xiaomi,
+                };
+            }
+        },
+    },
     xiaomi_switch_operation_mode: {
         key: ['operation_mode'],
         convert: (key, value, message, type, postfix) => {
