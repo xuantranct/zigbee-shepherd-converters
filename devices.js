@@ -2049,6 +2049,15 @@ const devices = [
         fromZigbee: [fz.nue_click, fz.ignore_power_report, fz.ignore_power_change],
     },
     {
+        zigbeeModel: ['FB56+ZSW1IKJ2.5'],
+        model: 'HGZB-043',
+        vendor: 'Nue / 3A',
+        description: 'Smart 3 key scene wall switch',
+        supports: 'on/off, click',
+        toZigbee: [tz.on_off],
+        fromZigbee: [fz.nue_click, fz.ignore_power_report, fz.ignore_power_change],
+    },
+    {
         zigbeeModel: ['FB56+ZSN08KJ2.3'],
         model: 'HGZB-045',
         vendor: 'Nue / 3A',
